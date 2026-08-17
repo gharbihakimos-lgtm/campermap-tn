@@ -1,10 +1,7 @@
-# Multi-stage Dockerfile for CamperMap TN
-FROM node:22-alpine AS builder
+# Production Dockerfile for CamperMap TN
+FROM node:22-slim AS builder
 
 WORKDIR /app
-
-# Install build tools required for native C++ modules (better-sqlite3)
-RUN apk add --no-cache python3 make g++
 
 COPY package*.json ./
 RUN npm ci
@@ -13,7 +10,7 @@ COPY . .
 RUN npm run build
 
 # Production Stage
-FROM node:22-alpine AS runner
+FROM node:22-slim AS runner
 
 WORKDIR /app
 
