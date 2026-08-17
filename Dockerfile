@@ -3,6 +3,9 @@ FROM node:22-slim AS builder
 
 WORKDIR /app
 
+# Install essential build tools for better-sqlite3 compilation
+RUN apt-get update && apt-get install -y python3 make g++ gcc --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
 COPY package*.json ./
 RUN npm ci
 
