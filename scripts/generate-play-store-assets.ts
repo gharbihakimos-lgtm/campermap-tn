@@ -13,61 +13,127 @@ if (!fs.existsSync(screenshotsDir)) {
   fs.mkdirSync(screenshotsDir, { recursive: true });
 }
 
-// 1. High-Resolution 512x512 App Icon SVG
+// 1. High-Resolution 512x512 App Icon SVG (Mountains, Tent, Campfire, Sunset Glow — No cross shapes)
 const iconSvg = `
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
+    <!-- Background Gradient -->
     <linearGradient id="bgGrad" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#1c1917" />
-      <stop offset="50%" stop-color="#0c0a09" />
+      <stop offset="60%" stop-color="#0c0a09" />
       <stop offset="100%" stop-color="#050505" />
     </linearGradient>
-    <linearGradient id="accentGrad" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+
+    <!-- Sunset Sun / Sky Glow Gradient -->
+    <radialGradient id="sunGrad" cx="256" cy="210" r="160" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="45%" stop-color="#f59e0b" />
+      <stop offset="75%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Mountain Peak Back Gradient -->
+    <linearGradient id="mountBackGrad" x1="200" y1="120" x2="380" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#44403c" />
+      <stop offset="100%" stop-color="#1c1917" />
+    </linearGradient>
+
+    <!-- Mountain Peak Front Gradient -->
+    <linearGradient id="mountFrontGrad" x1="100" y1="150" x2="300" y2="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#292524" />
+      <stop offset="100%" stop-color="#0c0a09" />
+    </linearGradient>
+
+    <!-- Tent Orange Glowing Gradient -->
+    <linearGradient id="tentGrad" x1="256" y1="230" x2="256" y2="370" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+
+    <!-- Border Ring Gradient -->
+    <linearGradient id="borderGrad" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#f59e0b" />
       <stop offset="50%" stop-color="#d97706" />
       <stop offset="100%" stop-color="#10b981" />
     </linearGradient>
-    <linearGradient id="glowGrad" x1="256" y1="120" x2="256" y2="400" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.3" />
-      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
-    </linearGradient>
-    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.8"/>
+
+    <!-- Shadow -->
+    <filter id="mainShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.8"/>
     </filter>
   </defs>
 
-  <!-- Background rounded squircle -->
-  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
-  <rect x="6" y="6" width="500" height="500" rx="106" stroke="url(#accentGrad)" stroke-width="4" stroke-opacity="0.4" fill="none" />
+  <!-- Background rounded squircle (App Icon Container) -->
+  <rect width="512" height="512" rx="116" fill="url(#bgGrad)" />
+  <rect x="6" y="6" width="500" height="500" rx="110" stroke="url(#borderGrad)" stroke-width="4" stroke-opacity="0.4" fill="none" />
 
-  <!-- Ambient Glow -->
-  <circle cx="256" cy="240" r="160" fill="url(#glowGrad)" />
+  <!-- Big Glowing Sunset / Sun in Sky -->
+  <circle cx="256" cy="195" r="130" fill="url(#sunGrad)" />
 
-  <!-- Compass Outer Dial Ring -->
-  <circle cx="256" cy="240" r="140" stroke="#f59e0b" stroke-width="6" stroke-opacity="0.7" stroke-dasharray="8 8" fill="none" />
-  <circle cx="256" cy="240" r="160" stroke="#44403c" stroke-width="2" fill="none" />
+  <!-- Sun Rays / Ring Arc -->
+  <circle cx="256" cy="195" r="145" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6 8" stroke-opacity="0.5" fill="none" />
 
-  <!-- Mountains / Tent Silhouette -->
-  <path d="M140 340 L256 160 L372 340 Z" fill="#292524" filter="url(#dropShadow)" />
-  <path d="M256 160 L372 340 L256 340 Z" fill="#1c1917" />
-  
-  <!-- Tent Entrance -->
-  <path d="M220 340 L256 260 L292 340 Z" fill="#f59e0b" />
-  <path d="M256 260 L292 340 L256 340 Z" fill="#d97706" />
+  <!-- Back Mountain (Zaghouan / Chaambi peak) -->
+  <polygon points="340,135 450,330 230,330" fill="url(#mountBackGrad)" />
+  <polygon points="340,135 450,330 340,330" fill="#1c1917" opacity="0.6" />
+  <!-- Snow / Light on back mountain peak -->
+  <polygon points="340,135 365,180 340,170 320,180" fill="#fef3c7" opacity="0.8" />
 
-  <!-- Compass Star / Needle on Top -->
-  <path d="M256 100 L270 210 L330 220 L270 230 L256 290 L242 230 L182 220 L242 210 Z" fill="url(#accentGrad)" filter="url(#dropShadow)" />
-  <circle cx="256" cy="220" r="8" fill="#ffffff" />
+  <!-- Front Majestic Mountain (Main North & Dorsale Peak) -->
+  <polygon points="190,120 330,340 50,340" fill="url(#mountFrontGrad)" filter="url(#mainShadow)" />
+  <polygon points="190,120 330,340 190,340" fill="#141210" opacity="0.7" />
+  <!-- Snow / Sunset highlight on front peak -->
+  <polygon points="190,120 220,175 190,165 160,175" fill="#ffffff" opacity="0.9" />
 
-  <!-- Bottom Brand Text -->
-  <text x="256" y="420" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="38" fill="#ffffff" letter-spacing="2">
+  <!-- Pine Trees (Forêts d'Ain Draham) -->
+  <g fill="#064e3b" opacity="0.9">
+    <!-- Left Tree -->
+    <polygon points="90,300 110,345 70,345" />
+    <polygon points="90,280 105,315 75,315" />
+    <!-- Right Tree -->
+    <polygon points="410,300 430,345 390,345" />
+    <polygon points="410,280 425,315 395,315" />
+  </g>
+
+  <!-- Ground / Camping Hill Horizon -->
+  <path d="M40 375 Q 256 315 472 375 L472 400 L40 400 Z" fill="#1c1917" />
+  <path d="M40 385 Q 256 325 472 385 L472 400 L40 400 Z" fill="#0c0a09" />
+
+  <!-- Dome Camping Tent in Center -->
+  <g transform="translate(256, 320)" filter="url(#mainShadow)">
+    <!-- Tent Outer Shell (Golden Glow) -->
+    <path d="M -75,40 Q 0,-65 75,40 Z" fill="url(#tentGrad)" stroke="#d97706" stroke-width="3" />
+    
+    <!-- Tent Front Flap Shadow -->
+    <path d="M 0,-65 Q 40,-10 75,40 L 0,40 Z" fill="#b45309" opacity="0.4" />
+    
+    <!-- Tent Glowing Entrance Doorway -->
+    <path d="M -30,40 Q 0,-25 30,40 Z" fill="#0c0a09" />
+    <path d="M -22,40 Q 0,-15 22,40 Z" fill="#fef3c7" />
+    <path d="M -15,40 Q 0,-5 15,40 Z" fill="#ffffff" />
+  </g>
+
+  <!-- Small Cozy Campfire on Right of Tent -->
+  <g transform="translate(370, 355)">
+    <!-- Fire logs -->
+    <line x1="-12" y1="8" x2="12" y2="-4" stroke="#78350f" stroke-width="4" stroke-linecap="round"/>
+    <line x1="-12" y1="-4" x2="12" y2="8" stroke="#78350f" stroke-width="4" stroke-linecap="round"/>
+    <!-- Flames -->
+    <circle cx="0" cy="0" r="10" fill="#ef4444" opacity="0.9"/>
+    <circle cx="0" cy="-4" r="7" fill="#f59e0b"/>
+    <circle cx="0" cy="-7" r="4" fill="#fef08a"/>
+  </g>
+
+  <!-- Brand Typography at Bottom -->
+  <text x="256" y="440" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="36" fill="#ffffff" letter-spacing="2">
     CAMPERMAP <tspan fill="#f59e0b">TN</tspan>
   </text>
-  <text x="256" y="452" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="16" fill="#a8a29e" letter-spacing="4">
-    BIVOUAC • 4X4 • RANDONNÉE
+  <text x="256" y="468" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="14" fill="#a8a29e" letter-spacing="4">
+    BIVOUAC • OUTDOOR • 4X4
   </text>
 </svg>
 `;
+
 
 // 2. Feature Graphic (1024x500) SVG
 const featureGraphicSvg = `
@@ -536,12 +602,15 @@ async function buildAllAssets() {
     const splashSvg = `
     <svg width="1080" height="1920" viewBox="0 0 1080 1920" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="1080" height="1920" fill="#0c0a09"/>
-      <circle cx="540" cy="900" r="160" fill="#f59e0b" fill-opacity="0.1"/>
-      <g transform="translate(540, 900) scale(0.6)">
-        <path d="M0 -140 L16 -30 L126 -16 L16 0 L0 110 L-16 0 L-126 -16 L-16 -30 Z" fill="#f59e0b"/>
-        <circle cx="0" cy="-16" r="12" fill="#ffffff"/>
-      </g>
-      <text x="540" y="1080" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="44" fill="#ffffff">
+      <circle cx="540" cy="850" r="180" fill="#f59e0b" fill-opacity="0.15"/>
+      <!-- Mountain Peak -->
+      <polygon points="540,700 680,950 400,950" fill="#292524" />
+      <polygon points="540,700 680,950 540,950" fill="#1c1917" opacity="0.6" />
+      <polygon points="540,700 565,745 540,735 515,745" fill="#ffffff" />
+      <!-- Glowing Tent -->
+      <path d="M 470,950 Q 540,840 610,950 Z" fill="#f59e0b" />
+      <path d="M 515,950 Q 540,890 565,950 Z" fill="#ffffff" />
+      <text x="540" y="1080" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="48" fill="#ffffff">
         CamperMap <tspan fill="#f59e0b">TN</tspan>
       </text>
       <text x="540" y="1130" text-anchor="middle" font-family="sans-serif" font-weight="600" font-size="20" fill="#a8a29e" letter-spacing="4">
@@ -549,6 +618,7 @@ async function buildAllAssets() {
       </text>
     </svg>
     `;
+
     await sharp(Buffer.from(splashSvg))
       .resize(1080, 1920)
       .png()
