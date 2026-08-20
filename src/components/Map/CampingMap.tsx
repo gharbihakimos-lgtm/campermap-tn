@@ -162,7 +162,7 @@ export const CampingMap: React.FC<CampingMapProps> = ({
             </span>
           ` : ''}
           <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:flex flex-col items-center pointer-events-none">
-            <div class="bg-stone-900 text-stone-100 text-[11px] font-semibold px-2 py-1 rounded-lg border border-stone-700 whitespace-nowrap shadow-lg">
+            <div class="bg-stone-900 text-stone-100 text-[11px] font-semibold px-2 py-1.5 px-3 rounded-lg border border-stone-700 whitespace-nowrap shadow-lg">
               ${spot.name}
             </div>
             <div class="w-1.5 h-1.5 bg-stone-900 rotate-45 -mt-0.5 border-r border-b border-stone-700"></div>
@@ -231,7 +231,7 @@ export const CampingMap: React.FC<CampingMapProps> = ({
         </div>
       `;
 
-      marker.bindPopup(popupHtml, { maxWidth: 280, minWidth: 260 });
+      marker.bindPopup(popupHtml, { maxWidth: 260, minWidth: 260 });
 
       marker.on('click', () => {
         onSelectSpot(spot);
@@ -346,7 +346,7 @@ export const CampingMap: React.FC<CampingMapProps> = ({
         <div className="bg-stone-900/90 backdrop-blur-md p-1 rounded-xl border border-stone-700 shadow-xl flex items-center gap-1">
           <button
             onClick={() => setActiveLayer('streets')}
-            className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+            className={`px-2.5 py-1.5 px-3 rounded-lg text-xs font-semibold transition-all ${
               activeLayer === 'streets'
                 ? 'bg-amber-500 text-stone-950 font-bold shadow'
                 : 'text-stone-300 hover:text-white'
@@ -357,7 +357,7 @@ export const CampingMap: React.FC<CampingMapProps> = ({
           </button>
           <button
             onClick={() => setActiveLayer('satellite')}
-            className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+            className={`px-2.5 py-1.5 px-3 rounded-lg text-xs font-semibold transition-all ${
               activeLayer === 'satellite'
                 ? 'bg-amber-500 text-stone-950 font-bold shadow'
                 : 'text-stone-300 hover:text-white'
@@ -368,7 +368,7 @@ export const CampingMap: React.FC<CampingMapProps> = ({
           </button>
           <button
             onClick={() => setActiveLayer('topo')}
-            className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+            className={`px-2.5 py-1.5 px-3 rounded-lg text-xs font-semibold transition-all ${
               activeLayer === 'topo'
                 ? 'bg-amber-500 text-stone-950 font-bold shadow'
                 : 'text-stone-300 hover:text-white'
@@ -385,7 +385,7 @@ export const CampingMap: React.FC<CampingMapProps> = ({
           <button
             onClick={onLocateUser}
             disabled={isLocating}
-            className={`p-2.5 rounded-xl bg-stone-900/90 backdrop-blur-md border border-stone-700 text-stone-100 shadow-xl hover:bg-stone-800 transition-all ${
+            className={`p-3 rounded-xl bg-stone-900/90 backdrop-blur-md border border-stone-700 text-stone-100 shadow-xl hover:bg-stone-800 transition-all ${
               isLocating ? 'animate-spin text-sky-400' : 'hover:text-sky-400'
             }`}
             title="Me géolocaliser (GPS)"
@@ -396,7 +396,7 @@ export const CampingMap: React.FC<CampingMapProps> = ({
           {/* Reset View to Whole Tunisia */}
           <button
             onClick={handleResetView}
-            className="p-2.5 rounded-xl bg-stone-900/90 backdrop-blur-md border border-stone-700 text-stone-100 shadow-xl hover:bg-stone-800 hover:text-amber-400 transition-all"
+            className="p-3 rounded-xl bg-stone-900/90 backdrop-blur-md border border-stone-700 text-stone-100 shadow-xl hover:bg-stone-800 hover:text-amber-400 transition-all"
             title="Recentrer sur toute la Tunisie"
           >
             <Maximize2 className="w-4 h-4" />

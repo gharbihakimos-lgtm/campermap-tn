@@ -162,7 +162,7 @@ export const ChecklistModal: React.FC<ChecklistModalProps> = ({ isOpen, onClose 
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl bg-stone-800 text-stone-400 hover:text-white"
+            className="p-2.5 rounded-xl bg-stone-800 text-stone-400 hover:text-white min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <X className="w-5 h-5" />
           </button>
@@ -211,7 +211,7 @@ export const ChecklistModal: React.FC<ChecklistModalProps> = ({ isOpen, onClose 
             placeholder="Ajouter un équipement personnel (ex: Drone, Hamac, Canne à pêche...)"
             value={newItemTitle}
             onChange={(e) => setNewItemTitle(e.target.value)}
-            className="flex-1 bg-stone-950 border border-stone-800 rounded-xl px-3 py-2 text-xs text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500"
+            className="flex-1 bg-stone-950 border border-stone-800 rounded-xl px-3 py-2 text-[16px] sm:text-xs text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500"
           />
           <button
             type="submit"

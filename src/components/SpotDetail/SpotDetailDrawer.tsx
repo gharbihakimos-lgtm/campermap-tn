@@ -191,7 +191,7 @@ export const SpotDetailDrawer: React.FC<SpotDetailDrawerProps> = ({
             {/* Favorite Button */}
             <button
               onClick={() => onToggleFavorite(spot.id)}
-              className={`p-2 rounded-xl border transition-all ${
+              className={`p-2.5 rounded-xl border transition-all ${
                 isFavorite
                   ? 'bg-rose-950/80 text-rose-400 border-rose-800'
                   : 'bg-stone-800 text-stone-400 hover:text-white border-stone-700'
@@ -204,7 +204,7 @@ export const SpotDetailDrawer: React.FC<SpotDetailDrawerProps> = ({
             {/* Share Button */}
             <button
               onClick={handleShare}
-              className="p-2 rounded-xl bg-stone-800 text-stone-400 hover:text-white border border-stone-700 transition-all relative"
+              className="p-2.5 rounded-xl bg-stone-800 text-stone-400 hover:text-white border border-stone-700 transition-all relative"
               title="Copier le lien"
             >
               <Share2 className="w-4 h-4" />
@@ -218,7 +218,7 @@ export const SpotDetailDrawer: React.FC<SpotDetailDrawerProps> = ({
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="p-2 rounded-xl bg-stone-800 text-stone-400 hover:text-white border border-stone-700 transition-all"
+              className="p-2.5 rounded-xl bg-stone-800 text-stone-400 hover:text-white border border-stone-700 transition-all"
             >
               <X className="w-4 h-4" />
             </button>
@@ -312,7 +312,7 @@ export const SpotDetailDrawer: React.FC<SpotDetailDrawerProps> = ({
               <Navigation className="w-3.5 h-3.5 text-amber-500" />
               <span>Ouvrir l'application GPS sur votre téléphone</span>
             </div>
-            <div className="grid grid-cols-4 gap-1.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
               <a
                 href={navUrls.googleMaps}
                 target="_blank"
@@ -406,7 +406,7 @@ export const SpotDetailDrawer: React.FC<SpotDetailDrawerProps> = ({
             {weather && (
               <>
                 {/* Current Weather Card */}
-                <div className="grid grid-cols-3 gap-2 bg-stone-900/80 p-3 rounded-xl border border-stone-700/60 items-center">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 bg-stone-900/80 p-3 rounded-xl border border-stone-700/60 items-center">
                   <div className="flex items-center gap-2">
                     <span className="text-3xl">{weather.current.conditionEmoji}</span>
                     <div>
@@ -441,7 +441,7 @@ export const SpotDetailDrawer: React.FC<SpotDetailDrawerProps> = ({
                 )}
 
                 {/* 3-Day Forecast Strip */}
-                <div className="grid grid-cols-4 gap-1.5 pt-1">
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 pt-1">
                   {weather.daily.map((day, idx) => (
                     <div key={idx} className="bg-stone-950/70 p-2 rounded-xl border border-stone-800/80 text-center">
                       <div className="text-[10px] font-semibold text-stone-400 truncate">{day.dayName}</div>
@@ -473,7 +473,7 @@ export const SpotDetailDrawer: React.FC<SpotDetailDrawerProps> = ({
                   </span>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <div className="bg-stone-900/80 p-2.5 rounded-xl border border-stone-800 text-center">
                     <div className="text-[10px] text-amber-400/90 font-medium flex items-center justify-center gap-1">
                       <Sunrise className="w-3.5 h-3.5" />
@@ -699,7 +699,7 @@ export const SpotDetailDrawer: React.FC<SpotDetailDrawerProps> = ({
           </div>
 
           {/* Network & Best Season */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="bg-stone-950 p-3 rounded-xl border border-stone-800">
               <div className="text-[10px] uppercase font-bold text-stone-400 mb-1 flex items-center gap-1">
                 <Wifi className="w-3.5 h-3.5 text-indigo-400" />

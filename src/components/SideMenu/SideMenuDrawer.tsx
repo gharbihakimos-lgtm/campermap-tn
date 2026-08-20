@@ -15,14 +15,17 @@ import {
   Trees, 
   ChevronRight,
   UserCheck,
-  HelpCircle
+  HelpCircle,
+  Building2
 } from 'lucide-react';
+
 
 interface SideMenuDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   onOpenSettings: () => void;
-  onOpenLegal: (tab?: 'cgu' | 'charter' | 'privacy' | 'disclaimer') => void;
+  onOpenLegal: (tab?: 'cgu' | 'charter' | 'privacy' | 'disclaimer' | 'mentions') => void;
+
   onOpenSafety: () => void;
   onOpenRoutePlanner: () => void;
   onOpenAddSpot: () => void;
@@ -315,8 +318,23 @@ export const SideMenuDrawer: React.FC<SideMenuDrawerProps> = ({
               <button
                 onClick={() => {
                   onClose();
+                  onOpenLegal('mentions');
+                }}
+                className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-stone-800 text-stone-300 hover:text-white transition-all text-left"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Building2 className="w-4 h-4 text-amber-400" />
+                  <span className="font-semibold">Mentions Légales & Éditeur</span>
+                </div>
+                <ChevronRight className="w-3.5 h-3.5 text-stone-400" />
+              </button>
+
+              <button
+                onClick={() => {
+                  onClose();
                   onOpenLegal('charter');
                 }}
+
                 className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-stone-800 text-stone-300 hover:text-white transition-all text-left"
               >
                 <div className="flex items-center gap-2.5">

@@ -88,7 +88,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg bg-stone-800 text-stone-400 hover:text-white"
+            className="p-2.5 rounded-lg bg-stone-800 text-stone-400 hover:text-white"
           >
             <X className="w-5 h-5" />
           </button>
@@ -107,7 +107,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                 <div className="font-semibold text-stone-200">Distances & Vitesses</div>
                 <div className="text-[11px] text-stone-400">Kilomètres (km/h) ou Miles terrestres (mph)</div>
               </div>
-              <div className="flex bg-stone-900 p-1 rounded-xl border border-stone-700">
+              <div className="flex flex-wrap bg-stone-900 p-1 rounded-xl border border-stone-700">
                 <button
                   type="button"
                   onClick={() => setDistanceUnit('km')}

@@ -108,7 +108,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
         {/* Quick Access Pills */}
         <button
           onClick={() => toggleAccess('foot')}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
             filters.accessTypes.includes('foot')
               ? 'bg-emerald-600/30 text-emerald-300 border-emerald-500 font-semibold'
               : 'bg-stone-800/80 text-stone-300 border-stone-700 hover:border-stone-500'
@@ -120,7 +120,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
 
         <button
           onClick={() => toggleAccess('4x4')}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
             filters.accessTypes.includes('4x4')
               ? 'bg-amber-600/30 text-amber-300 border-amber-500 font-semibold'
               : 'bg-stone-800/80 text-stone-300 border-stone-700 hover:border-stone-500'
@@ -132,7 +132,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
 
         <button
           onClick={() => toggleActivity('swimming')}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
             filters.activities.includes('swimming')
               ? 'bg-sky-600/30 text-sky-300 border-sky-500 font-semibold'
               : 'bg-stone-800/80 text-stone-300 border-stone-700 hover:border-stone-500'
@@ -143,7 +143,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
 
         <button
           onClick={() => toggleActivity('climbing')}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
             filters.activities.includes('climbing')
               ? 'bg-orange-600/30 text-orange-300 border-orange-500 font-semibold'
               : 'bg-stone-800/80 text-stone-300 border-stone-700 hover:border-stone-500'
@@ -154,7 +154,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
 
         <button
           onClick={() => toggleActivity('stargazing')}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
             filters.activities.includes('stargazing')
               ? 'bg-indigo-600/30 text-indigo-300 border-indigo-500 font-semibold'
               : 'bg-stone-800/80 text-stone-300 border-stone-700 hover:border-stone-500'
@@ -165,7 +165,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
 
         <button
           onClick={() => toggleAmenity('potable_water')}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
             filters.amenities.includes('potable_water')
               ? 'bg-cyan-600/30 text-cyan-300 border-cyan-500 font-semibold'
               : 'bg-stone-800/80 text-stone-300 border-stone-700 hover:border-stone-500'
@@ -177,7 +177,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
 
         <button
           onClick={() => toggleAmenity('dense_forest')}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
             filters.amenities.includes('dense_forest')
               ? 'bg-green-600/30 text-green-300 border-green-500 font-semibold'
               : 'bg-stone-800/80 text-stone-300 border-stone-700 hover:border-stone-500'
@@ -190,7 +190,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
         {activeFiltersCount > 0 && (
           <button
             onClick={resetFilters}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-950/80 text-red-300 border border-red-800/60 hover:bg-red-900 transition-all shrink-0 ml-auto"
+            className="flex items-center gap-1 px-2.5 py-2 rounded-full text-xs font-semibold bg-red-950/80 text-red-300 border border-red-800/60 hover:bg-red-900 transition-all shrink-0 ml-auto"
           >
             <RotateCcw className="w-3 h-3" />
             Réinitialiser ({activeFiltersCount})
@@ -221,7 +221,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
               </div>
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-lg bg-stone-800 text-stone-400 hover:text-stone-100 hover:bg-stone-700"
+                className="p-2.5 rounded-lg bg-stone-800 text-stone-400 hover:text-stone-100 hover:bg-stone-700"
               >
                 ✕
               </button>

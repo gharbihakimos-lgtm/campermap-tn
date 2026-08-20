@@ -223,7 +223,7 @@ export const RoutePlannerModal: React.FC<RoutePlannerModalProps> = ({
             <label className="block text-xs font-semibold text-stone-300 mb-2">
               Mode de transport envisagé
             </label>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {[
                 { id: 'car', label: 'Voiture', icon: Car, desc: 'Route & Piste facile' },
                 { id: '4x4', label: '4x4 / Piste', icon: Truck, desc: 'Tout-terrain & Dunes' },

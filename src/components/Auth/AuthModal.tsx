@@ -89,7 +89,7 @@ export const AuthModal: React.FC = () => {
           </div>
           <button
             onClick={() => setIsAuthModalOpen(false)}
-            className="p-1.5 rounded-lg bg-stone-800 text-stone-400 hover:text-white"
+            className="p-2.5 rounded-lg bg-stone-800 text-stone-400 hover:text-white"
           >
             <X className="w-5 h-5" />
           </button>
@@ -199,7 +199,7 @@ export const AuthModal: React.FC = () => {
           {!isLoginMode && (
             <div>
               <label className="block font-semibold text-stone-300 mb-1.5">Moyen d'exploration préféré</label>
-              <div className="grid grid-cols-3 gap-1.5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
                 {[
                   { id: '4x4', label: '4x4 / Piste', icon: Truck },
                   { id: 'foot', label: 'Rando / À pied', icon: Footprints },

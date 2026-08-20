@@ -169,7 +169,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg bg-stone-800 text-stone-400 hover:text-stone-100 hover:bg-stone-700"
+            className="p-2.5 rounded-lg bg-stone-800 text-stone-400 hover:text-stone-100 hover:bg-stone-700"
           >
             <X className="w-5 h-5" />
           </button>
@@ -243,7 +243,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
 
           {/* Coordinates Picker Section */}
           <div className="bg-stone-950 p-3.5 rounded-xl border border-stone-800 space-y-2.5">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap gap-2">
               <label className="text-xs font-bold text-amber-400 flex items-center gap-1.5">
                 <MapPin className="w-4 h-4" />
                 Coordonnées GPS du Spot

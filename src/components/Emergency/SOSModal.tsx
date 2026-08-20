@@ -128,7 +128,7 @@ export const SOSModal: React.FC<SOSModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl bg-stone-800 text-stone-400 hover:text-white"
+            className="p-2.5 rounded-xl bg-stone-800 text-stone-400 hover:text-white min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <X className="w-5 h-5" />
           </button>
@@ -151,11 +151,11 @@ export const SOSModal: React.FC<SOSModalProps> = ({
             </button>
           </div>
 
-          <div className="font-mono text-xl md:text-2xl font-black text-amber-400 py-1 tracking-wider selection:bg-amber-500 selection:text-stone-950">
+          <div className="font-mono text-sm sm:text-xl md:text-2xl font-black text-amber-400 py-1 tracking-wider break-all selection:bg-amber-500 selection:text-stone-950">
             {latText}, {lngText}
           </div>
 
-          <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-stone-850">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3 pt-3 border-t border-stone-850">
             <button
               onClick={handleCopy}
               className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-stone-850 hover:bg-stone-800 text-stone-200 text-xs font-bold border border-stone-700 transition-all"

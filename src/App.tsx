@@ -16,6 +16,7 @@ import { LegalModal } from './components/Legal/LegalModal';
 import { WelcomeTourModal } from './components/Onboarding/WelcomeTourModal';
 import { SOSModal } from './components/Emergency/SOSModal';
 import { ChecklistModal } from './components/Checklist/ChecklistModal';
+import { BottomNavBar } from './components/Navigation/BottomNavBar';
 import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { INITIAL_SPOTS } from './data/spotsData';
@@ -76,7 +77,8 @@ function CamperMapApp() {
   const [isWelcomeTourOpen, setIsWelcomeTourOpen] = useState(false);
   const [isSOSModalOpen, setIsSOSModalOpen] = useState(false);
   const [isChecklistModalOpen, setIsChecklistModalOpen] = useState(false);
-  const [legalDefaultTab, setLegalDefaultTab] = useState<'cgu' | 'charter' | 'privacy' | 'disclaimer'>('charter');
+  const [legalDefaultTab, setLegalDefaultTab] = useState<'cgu' | 'charter' | 'privacy' | 'disclaimer' | 'mentions'>('charter');
+
 
   // Geolocation & Route
   const [userLocation, setUserLocation] = useState<SpotCoordinates | null>(null);
@@ -221,14 +223,15 @@ function CamperMapApp() {
     });
   }, [spots, filters]);
 
-  const handleOpenLegalWithTab = (tab?: 'cgu' | 'charter' | 'privacy' | 'disclaimer') => {
+  const handleOpenLegalWithTab = (tab?: 'cgu' | 'charter' | 'privacy' | 'disclaimer' | 'mentions') => {
     setLegalDefaultTab(tab || 'charter');
     setIsLegalOpen(true);
   };
 
 
   return (
-    <div className="flex flex-col h-screen w-screen bg-stone-950 text-stone-100 overflow-hidden select-none">
+    <div className="flex flex-col h-dvh w-full bg-stone-950 text-stone-100 overflow-hidden select-none">
+
       
       {/* Top Navbar */}
       <Navbar
@@ -258,7 +261,7 @@ function CamperMapApp() {
       />
 
       {/* Main App Layout */}
-      <main className="flex-1 relative flex overflow-hidden">
+      <main className="flex-1 relative flex overflow-hidden pb-14 md:pb-0">
         
         {/* Left List Sidebar on Desktop or when in List/Favorites mode */}
         {(viewMode === 'list' || viewMode === 'favorites') && (
@@ -394,6 +397,15 @@ function CamperMapApp() {
 
       {/* Add Log Entry Modal (Bivouac / Rando Logger) */}
       <AddLogEntryModal spots={spots} />
+
+      {/* Mobile Bottom Navigation Bar (visible < 768px) */}
+      <BottomNavBar
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+        filteredSpotsCount={filteredSpots.length}
+        favoritesCount={favorites.length}
+        onOpenSideMenu={() => setIsSideMenuOpen(true)}
+      />
 
       {/* Welcome Interactive Tour Guide */}
       <WelcomeTourModal
