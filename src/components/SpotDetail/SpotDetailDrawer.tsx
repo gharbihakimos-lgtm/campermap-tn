@@ -31,12 +31,17 @@ import {
   TrendingUp,
   Wind,
   CloudRain,
-  Loader2
+  Loader2,
+  Sunrise,
+  Sunset,
+  Sparkles
 } from 'lucide-react';
 
 import { downloadSpotGPX } from '../../utils/gpxGenerator';
 import { formatCoordinates, getNavigationUrls } from '../../utils/geoUtils';
 import { fetchSpotWeather, type WeatherData } from '../../services/weatherService';
+import { calculateSolarTimes } from '../../utils/solarCalculator';
+
 
 interface SpotDetailDrawerProps {
   spot: CampingSpot | null;
@@ -453,9 +458,56 @@ export const SpotDetailDrawer: React.FC<SpotDetailDrawerProps> = ({
             )}
           </div>
 
+          {/* Solar Times & Golden Hour Card */}
+          {spot && (() => {
+            const solar = calculateSolarTimes(spot.coordinates.lat, spot.coordinates.lng);
+            return (
+              <div className="bg-stone-950 rounded-2xl p-4 border border-stone-800 space-y-3 shadow-md">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                    <Sunrise className="w-4 h-4 text-amber-400" />
+                    <span>Éphéméride & Heures Solaires</span>
+                  </h3>
+                  <span className="text-[10px] text-stone-400">
+                    Durée du jour : <strong className="text-stone-200">{solar.dayLength}</strong>
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="bg-stone-900/80 p-2.5 rounded-xl border border-stone-800 text-center">
+                    <div className="text-[10px] text-amber-400/90 font-medium flex items-center justify-center gap-1">
+                      <Sunrise className="w-3.5 h-3.5" />
+                      <span>Lever</span>
+                    </div>
+                    <div className="text-sm font-black text-stone-100 mt-0.5">{solar.sunrise}</div>
+                    <div className="text-[9px] text-stone-500">Aube {solar.dawn}</div>
+                  </div>
+
+                  <div className="bg-stone-900/80 p-2.5 rounded-xl border border-stone-800 text-center">
+                    <div className="text-[10px] text-orange-400/90 font-medium flex items-center justify-center gap-1">
+                      <Sunset className="w-3.5 h-3.5" />
+                      <span>Coucher</span>
+                    </div>
+                    <div className="text-sm font-black text-stone-100 mt-0.5">{solar.sunset}</div>
+                    <div className="text-[9px] text-stone-500">Montage tente</div>
+                  </div>
+
+                  <div className="bg-gradient-to-br from-amber-950/40 to-orange-950/40 p-2.5 rounded-xl border border-amber-900/40 text-center">
+                    <div className="text-[10px] text-amber-300 font-bold flex items-center justify-center gap-1">
+                      <Sparkles className="w-3 h-3 text-amber-400" />
+                      <span>Golden Hour</span>
+                    </div>
+                    <div className="text-sm font-black text-amber-300 mt-0.5">{solar.goldenHour}</div>
+                    <div className="text-[9px] text-amber-400/70">Meilleures photos</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Road Nature & Accessibility Card */}
           <div className="bg-stone-950 rounded-2xl p-4 border border-stone-800 space-y-3.5">
+
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-bold uppercase tracking-wider text-stone-400 flex items-center gap-1.5">
                 <Truck className="w-4 h-4 text-amber-500" />

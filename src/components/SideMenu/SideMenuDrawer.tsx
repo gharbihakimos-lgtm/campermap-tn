@@ -27,8 +27,9 @@ interface SideMenuDrawerProps {
   onOpenRoutePlanner: () => void;
   onOpenAddSpot: () => void;
   onOpenWelcomeTour: () => void;
+  onOpenSOS: () => void;
+  onOpenChecklist: () => void;
 }
-
 
 export const SideMenuDrawer: React.FC<SideMenuDrawerProps> = ({
   isOpen,
@@ -38,8 +39,11 @@ export const SideMenuDrawer: React.FC<SideMenuDrawerProps> = ({
   onOpenSafety,
   onOpenRoutePlanner,
   onOpenAddSpot,
-  onOpenWelcomeTour
+  onOpenWelcomeTour,
+  onOpenSOS,
+  onOpenChecklist
 }) => {
+
   const { user, stats, setIsProfileOpen, setIsAuthModalOpen, logout } = useAuth();
 
 
@@ -231,18 +235,47 @@ export const SideMenuDrawer: React.FC<SideMenuDrawerProps> = ({
               <button
                 onClick={() => {
                   onClose();
+                  onOpenChecklist();
+                }}
+                className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-stone-800 text-stone-300 hover:text-white transition-all text-left"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Compass className="w-4 h-4 text-amber-400" />
+                  <span className="font-semibold">Checklist Sac & Matériel 🎒</span>
+                </div>
+                <ChevronRight className="w-3.5 h-3.5 text-stone-400" />
+              </button>
+
+              <button
+                onClick={() => {
+                  onClose();
+                  onOpenSOS();
+                }}
+                className="w-full flex items-center justify-between p-2.5 rounded-xl bg-red-950/40 border border-red-800/60 text-red-300 hover:text-white hover:bg-red-900/50 transition-all text-left"
+              >
+                <div className="flex items-center gap-2.5">
+                  <ShieldAlert className="w-4 h-4 text-red-500 animate-pulse" />
+                  <span className="font-bold">SOS Urgence & GPS 🆘</span>
+                </div>
+                <ChevronRight className="w-3.5 h-3.5 text-red-400" />
+              </button>
+
+              <button
+                onClick={() => {
+                  onClose();
                   onOpenSafety();
                 }}
                 className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-stone-800 text-stone-300 hover:text-white transition-all text-left"
               >
                 <div className="flex items-center gap-2.5">
                   <ShieldAlert className="w-4 h-4 text-orange-400" />
-                  <span className="font-semibold">Urgences Tunisie (198, 193...)</span>
+                  <span className="font-semibold">Guide Sécurité & Numéros Utiles</span>
                 </div>
                 <ChevronRight className="w-3.5 h-3.5 text-stone-400" />
               </button>
             </div>
           </div>
+
 
           {/* Section 3 : Paramètres & Documents Légaux */}
           <div>

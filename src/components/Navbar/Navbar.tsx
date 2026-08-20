@@ -14,10 +14,14 @@ import {
   WifiOff,
   DownloadCloud,
   CheckCircle2,
-  UserCheck
+  UserCheck,
+  CheckSquare,
+  AlertTriangle
 } from 'lucide-react';
 import type { FilterState } from '../../types/spot';
 import { useAuth } from '../../context/AuthContext';
+import { useLanguage } from '../../context/LanguageContext';
+
 
 interface NavbarProps {
   filters: FilterState;
@@ -26,6 +30,8 @@ interface NavbarProps {
   onOpenSafetyModal: () => void;
   onOpenRoutePlanner: () => void;
   onOpenSideMenu: () => void;
+  onOpenSOSModal: () => void;
+  onOpenChecklistModal: () => void;
   viewMode: 'map' | 'list' | 'favorites';
   setViewMode: (mode: 'map' | 'list' | 'favorites') => void;
   totalSpotsCount: number;
@@ -42,6 +48,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenSafetyModal,
   onOpenRoutePlanner,
   onOpenSideMenu,
+  onOpenSOSModal,
+  onOpenChecklistModal,
   viewMode,
   setViewMode,
   totalSpotsCount,
@@ -51,8 +59,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   isFilterPanelOpen,
 }) => {
   const { user, stats, setIsProfileOpen, setIsAuthModalOpen } = useAuth();
+  const { language, setLanguage } = useLanguage();
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+
   const [isCached, setIsCached] = useState(false);
+
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
@@ -233,6 +244,51 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="hidden xl:inline">Sécurité</span>
           </button>
 
+          {/* Checklist Sac à dos Button */}
+          <button
+            onClick={onOpenChecklistModal}
+            className="flex items-center gap-1.5 px-2.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-stone-800/80 text-amber-300 border border-amber-800/50 hover:bg-amber-950/50 transition-all"
+            title="Checklist Matériel de Bivouac"
+          >
+            <CheckSquare className="w-4 h-4" />
+            <span className="hidden xl:inline">Checklist</span>
+          </button>
+
+          {/* SOS Urgence Button (Red Alert) */}
+          <button
+            onClick={onOpenSOSModal}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs md:text-sm font-black bg-red-600/90 hover:bg-red-500 text-white border border-red-500 shadow-md shadow-red-700/30 transition-all animate-pulse"
+            title="SOS Urgence & Coordonnées GPS"
+          >
+            <AlertTriangle className="w-4 h-4 text-white" />
+            <span>SOS</span>
+          </button>
+
+          {/* Language Switcher Pill */}
+          <div className="flex items-center bg-stone-900 border border-stone-800 rounded-xl p-0.5 text-[11px] font-bold">
+            <button
+              onClick={() => setLanguage('fr')}
+              className={`px-1.5 py-1 rounded-lg transition-all ${language === 'fr' ? 'bg-amber-500 text-stone-950 shadow-xs' : 'text-stone-400 hover:text-stone-200'}`}
+              title="Français"
+            >
+              FR
+            </button>
+            <button
+              onClick={() => setLanguage('ar')}
+              className={`px-1.5 py-1 rounded-lg transition-all ${language === 'ar' ? 'bg-amber-500 text-stone-950 shadow-xs' : 'text-stone-400 hover:text-stone-200'}`}
+              title="العربية (Tunisie)"
+            >
+              عربي
+            </button>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`px-1.5 py-1 rounded-lg transition-all ${language === 'en' ? 'bg-amber-500 text-stone-950 shadow-xs' : 'text-stone-400 hover:text-stone-200'}`}
+              title="English"
+            >
+              EN
+            </button>
+          </div>
+
           {/* User Account / Profile Button */}
           {user ? (
             <button
@@ -268,11 +324,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <PlusCircle className="w-4 h-4 stroke-[2.5]" />
             <span className="hidden sm:inline">Ajouter un spot</span>
           </button>
-
-
         </div>
-
       </div>
+
 
       {/* Mobile Search input */}
       <div className="mt-2 block md:hidden relative">

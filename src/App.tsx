@@ -14,8 +14,10 @@ import { SideMenuDrawer } from './components/SideMenu/SideMenuDrawer';
 import { SettingsModal } from './components/Settings/SettingsModal';
 import { LegalModal } from './components/Legal/LegalModal';
 import { WelcomeTourModal } from './components/Onboarding/WelcomeTourModal';
+import { SOSModal } from './components/Emergency/SOSModal';
+import { ChecklistModal } from './components/Checklist/ChecklistModal';
 import { AuthProvider } from './context/AuthContext';
-
+import { LanguageProvider } from './context/LanguageContext';
 import { INITIAL_SPOTS } from './data/spotsData';
 import { api } from './services/apiClient';
 import type { CampingSpot, FilterState, SpotCoordinates, SpotReview } from './types/spot';
@@ -72,8 +74,9 @@ function CamperMapApp() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isLegalOpen, setIsLegalOpen] = useState(false);
   const [isWelcomeTourOpen, setIsWelcomeTourOpen] = useState(false);
+  const [isSOSModalOpen, setIsSOSModalOpen] = useState(false);
+  const [isChecklistModalOpen, setIsChecklistModalOpen] = useState(false);
   const [legalDefaultTab, setLegalDefaultTab] = useState<'cgu' | 'charter' | 'privacy' | 'disclaimer'>('charter');
-
 
   // Geolocation & Route
   const [userLocation, setUserLocation] = useState<SpotCoordinates | null>(null);
@@ -218,10 +221,11 @@ function CamperMapApp() {
     });
   }, [spots, filters]);
 
-  const handleOpenLegalWithTab = (tab: 'cgu' | 'charter' | 'privacy' | 'disclaimer' = 'charter') => {
-    setLegalDefaultTab(tab);
+  const handleOpenLegalWithTab = (tab?: 'cgu' | 'charter' | 'privacy' | 'disclaimer') => {
+    setLegalDefaultTab(tab || 'charter');
     setIsLegalOpen(true);
   };
+
 
   return (
     <div className="flex flex-col h-screen w-screen bg-stone-950 text-stone-100 overflow-hidden select-none">
@@ -234,6 +238,8 @@ function CamperMapApp() {
         onOpenSafetyModal={() => setIsSafetyModalOpen(true)}
         onOpenRoutePlanner={() => setIsRoutePlannerOpen(true)}
         onOpenSideMenu={() => setIsSideMenuOpen(true)}
+        onOpenSOSModal={() => setIsSOSModalOpen(true)}
+        onOpenChecklistModal={() => setIsChecklistModalOpen(true)}
         viewMode={viewMode}
         setViewMode={setViewMode}
         totalSpotsCount={spots.length}
@@ -305,8 +311,9 @@ function CamperMapApp() {
         onOpenRoutePlanner={() => setIsRoutePlannerOpen(true)}
         onOpenAddSpot={() => setIsAddModalOpen(true)}
         onOpenWelcomeTour={() => setIsWelcomeTourOpen(true)}
+        onOpenSOS={() => setIsSOSModalOpen(true)}
+        onOpenChecklist={() => setIsChecklistModalOpen(true)}
       />
-
 
       {/* Spot Detail Slide-over Drawer */}
       <SpotDetailDrawer
@@ -353,6 +360,19 @@ function CamperMapApp() {
         onClose={() => setIsSafetyModalOpen(false)}
       />
 
+      {/* SOS Emergency Modal */}
+      <SOSModal
+        isOpen={isSOSModalOpen}
+        onClose={() => setIsSOSModalOpen(false)}
+        userLocation={userLocation}
+      />
+
+      {/* Camping Gear Checklist Modal */}
+      <ChecklistModal
+        isOpen={isChecklistModalOpen}
+        onClose={() => setIsChecklistModalOpen(false)}
+      />
+
       {/* App Settings Modal */}
       <SettingsModal
         isOpen={isSettingsOpen}
@@ -382,15 +402,16 @@ function CamperMapApp() {
       />
 
     </div>
-
   );
 }
 
 export function App() {
   return (
-    <AuthProvider>
-      <CamperMapApp />
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <CamperMapApp />
+      </AuthProvider>
+    </LanguageProvider>
   );
 }
 
